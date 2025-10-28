@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOLO Project | Result</title>
+  <style>
+    body { margin:0; font-family:system-ui,sans-serif; background:#0b1220; color:#e8eef9; text-align:center; }
+    nav { display:flex; justify-content:center; gap:30px; background:#0f172a; padding:15px; border-bottom:1px solid #1f2a44; }
+    nav a { color:#cfe0ff; text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; }
+    nav a:hover, nav a.active { background:#1f2a44; color:white; }
+    h1 { color:#3a86ff; margin-top:30px; }
+    .result { max-width:900px; margin:40px auto; padding:20px; background:#121a2b; border:1px solid #1f2a44; border-radius:14px; }
+    img,video { max-width:100%; border-radius:12px; border:1px solid #1f2a44; }
+    a.btn { display:inline-block; margin-top:20px; background:#3a86ff; color:white; text-decoration:none; padding:12px 18px; border-radius:10px; font-weight:700; }
+    a.btn:hover { filter:brightness(1.05); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('info') }}">Overview</a>
+    <a href="{{ url_for('predict') }}">Predict</a>
+    <a href="{{ url_for('show_result', filename='') }}" class="active">Result</a>
+  </nav>
+
+  <h1>🖼️ Detection Result</h1>
+
+  <div class="result">
+    {% if filename.lower().endswith(('.mp4','.avi','.mov','.mkv')) %}
+      <video src="{{ file_url }}" controls></video>
+    {% else %}
+      <img src="{{ file_url }}" alt="Predicted Output">
+    {% endif %}
+    <br>
+    <a href="{{ url_for('predict') }}" class="btn">← Run Another Prediction</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOLO Project | Predict</title>
+  <style>
+    body { margin:0; font-family:system-ui,sans-serif; background:#0b1220; color:#e8eef9; }
+    nav { display:flex; justify-content:center; gap:30px; background:#0f172a; padding:15px; border-bottom:1px solid #1f2a44; }
+    nav a { color:#cfe0ff; text-decoration:none; font-weight:600; padding:6px 10px; border-radius:8px; }
+    nav a:hover, nav a.active { background:#1f2a44; color:white; }
+    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
+    h1 { color:#3a86ff; }
+    .grid { display:grid; gap:16px; grid-template-columns:1fr; }
+    @media(min-width:900px){ .grid{ grid-template-columns:1fr 1fr; } }
+    .card { background:#121a2b; border:1px solid #1f2a44; border-radius:14px; padding:16px; }
+    label{font-weight:600;}
+    input,button{padding:10px;border-radius:10px;border:1px solid #2b3a5f;background:#0e1626;color:#d4def7;}
+    button{background:#3a86ff;border:none;font-weight:700;cursor:pointer;}
+    button:hover{filter:brightness(1.05);}
+    img,video{max-width:100%;border-radius:12px;border:1px solid #1f2a44;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('info') }}">Overview</a>
+    <a href="{{ url_for('predict') }}" class="active">Predict</a>
+    <a href="{{ url_for('show_result', filename='') }}">Result</a>
+  </nav>
+
+  <div class="container">
+    <h1>🎯 Run Predictions</h1>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Live Webcam Detection</h2>
+        <label>Confidence:</label>
+        <input id="cam-conf" type="number" min="0" max="1" step="0.01" value="0.25">
+        <button id="cam-start">Start</button>
+        <button id="cam-stop">Stop</button>
+        <div style="margin-top:12px;">
+          <img id="cam-stream" alt="Webcam Stream will appear here">
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Upload Image or Video</h2>
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+          <label>Select file:</label>
+          <input type="file" name="file" accept="image/*,video/*" required>
+          <br><br>
+          <label>Confidence:</label>
+          <input type="number" name="conf" min="0" max="1" step="0.01" value="0.25">
+          <br><br>
+          <button type="submit">Run Detection</button>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const img = document.getElementById('cam-stream');
+    const startBtn = document.getElementById('cam-start');
+    const stopBtn = document.getElementById('cam-stop');
+    const confEl = document.getElementById('cam-conf');
+
+    startBtn.onclick = () => {
+      const c = encodeURIComponent(confEl.value || "0.25");
+      img.src = "{{ url_for('video_feed') }}" + "?conf=" + c;
+    };
+    stopBtn.onclick = () => { img.src = ""; };
+  </script>
+</body>
+</html>

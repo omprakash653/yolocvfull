@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOLO Project | Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #0b1220;
+      color: #e8eef9;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: #0f172a;
+      padding: 15px;
+      border-bottom: 1px solid #1f2a44;
+    }
+    nav a {
+      color: #cfe0ff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+    nav a:hover, nav a.active {
+      background: #1f2a44;
+      color: white;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-top: 60px;
+      color: #3a86ff;
+    }
+    h3 {
+      margin-top: 5px;
+      font-weight: 400;
+      color: #8fa6cc;
+    }
+    p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 20px auto;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    .images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .images img {
+      max-width: 450px;
+      border-radius: 16px;
+      border: 1px solid #1f2a44;
+      box-shadow: 0 0 15px rgba(58,134,255,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .images img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(58,134,255,0.35);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}" class="active">Home</a>
+    <a href="{{ url_for('info') }}">Overview</a>
+    <a href="{{ url_for('predict') }}">Predict</a>
+    <a href="{{ url_for('show_result', filename='') }}">Result</a>
+  </nav>
+
+  <h1>YOLOv11 Object Detection Web App</h1>
+  <h3>By Bhuman Wadekar</h3>
+
+  <p>
+    This web application demonstrates real-time object detection using a fine-tuned <strong>YOLOv11</strong> model.
+    It enables accurate recognition of multiple objects in images, videos, and webcam streams — 
+    built with <strong>Flask</strong> and powered by the <strong>Ultralytics YOLO</strong> framework.
+  </p>
+
+  <div class="images">
+    <img src="https://framerusercontent.com/images/wmnihLAMWTEv1yW0v6w4ETUz3BQ.jpeg?width=1078&height=952" alt="YOLO Object Detection Preview 1">
+    <img src="https://www.ayadata.ai/wp-content/uploads/2025/03/unnamed-11.webp" alt="YOLO Object Detection Preview 2">
+  </div>
+</body>
+</html>
