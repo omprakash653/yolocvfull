@@ -150,8 +150,8 @@ This app uses a **fine-tuned YOLOv11n model**, trained on your custom dataset.
 
 ## 👨‍💻 Author
 
-**Bhuman Wadekar**
-💡 Data Science & AI Enthusiast
+**Om Yadav**
+💡 Data Science & AI Engineer
 📍 India
 
 ---
